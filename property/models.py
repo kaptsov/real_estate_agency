@@ -1,5 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Flat(models.Model):
@@ -50,3 +52,12 @@ class Flat(models.Model):
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
+
+
+class Disliker(models.Model):
+    disliker = models.ForeignKey(User, on_delete='CASCADE')
+    flat = models.ForeignKey(Flat, on_delete='CASCADE')
+    message = models.TextField(blank=False)
+
+    def __str__(self):
+        return f'{self.disliker}, {self.flat.town} ({self.flat.address}р.)'

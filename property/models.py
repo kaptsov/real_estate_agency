@@ -49,14 +49,15 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
+    liked_by = models.ManyToManyField(User, related_name="liked_app")
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
 
 
 class Disliker(models.Model):
-    disliker = models.ForeignKey(User, on_delete='CASCADE')
-    flat = models.ForeignKey(Flat, on_delete='CASCADE')
+    disliker = models.ForeignKey(User, on_delete=models.CASCADE)
+    flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
     message = models.TextField(blank=False)
 
     def __str__(self):

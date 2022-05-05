@@ -51,7 +51,7 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
-    liked_by = models.ManyToManyField(User, related_name="liked_app", blank=True)
+    liked_by = models.ManyToManyField(User, related_name="liked_apt", blank=True)
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
@@ -64,3 +64,26 @@ class Disliker(models.Model):
 
     def __str__(self):
         return f'{self.disliker}, {self.flat.town} ({self.flat.address}р.)'
+
+
+class Owner(models.Model):
+    fullname = models.CharField(
+        'ФИО владельца',
+        max_length=200,
+        db_index=True)
+    phonenumber = models.CharField('Номер владельца', max_length=20)
+    owners_phonenumber_normalized = PhoneNumberField(
+        'Нормализованный номер владельца',
+        null=True,
+        blank=True
+    )
+    flats = models.ManyToManyField(
+        Flat,
+        related_name='owners',
+        verbose_name='Квартиры в собственности'
+    )
+
+    def __str__(self):
+        return self.fullname
+
+

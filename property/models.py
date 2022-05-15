@@ -63,29 +63,29 @@ class Flat(models.Model):
         db_index=True)
     liked_by = models.ManyToManyField(
         User,
-        related_name="liked_flat",
+        related_name="liked_flats",
         blank=True)
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
 
 
-class Disliker(models.Model):
+class Complainant(models.Model):
 
-    disliker = models.ForeignKey(
+    complainant = models.ForeignKey(
         User,
-        related_name='dislikers',
+        related_name='complainants',
         verbose_name='Кому не понравилась квартира',
         on_delete=models.CASCADE)
     flat = models.ForeignKey(
         Flat,
-        related_name='dislikers',
+        related_name='complainants',
         verbose_name='Квартира, которая не понравилась',
         on_delete=models.CASCADE)
     message = models.TextField(blank=False)
 
     def __str__(self):
-        return f'{self.disliker}, {self.flat.town} ({self.flat.address}р.)'
+        return f'{self.complainant}, {self.flat.town} ({self.flat.address}р.)'
 
 
 class Owner(models.Model):
@@ -110,7 +110,6 @@ class Owner(models.Model):
         Flat,
         related_name='owners',
         verbose_name='Квартиры в собственности',
-        null = True,
         blank = True,
     )
 

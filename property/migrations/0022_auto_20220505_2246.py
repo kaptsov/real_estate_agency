@@ -7,10 +7,10 @@ def link_flats_with_owners(apps, schema_editor):
     Flat = apps.get_model('property.Flat')
     Owner = apps.get_model('property.Owner')
 
-    for flat in Flat.objects.all():
-        updated_owner = Owner.objects.filter(fullname=flat.owner)[0]
-        updated_owner.flats.add(flat)
-        updated_owner.save()
+    for flat in Flat.objects.all().iterator():
+        owner = Owner.objects.get_or_create(fullname=flat.owner)
+        owner.flats.add(flat)
+        owner.save()
 
 
 class Migration(migrations.Migration):

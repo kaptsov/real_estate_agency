@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def normalize_phones(apps, schema_editor):
-    print('yo')
+
     Flat = apps.get_model('property.Flat')
     bad_num = Flat.objects.get(owners_phonenumber='+70000000000')
     print(bad_num)

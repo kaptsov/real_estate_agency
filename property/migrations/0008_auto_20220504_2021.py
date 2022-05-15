@@ -2,7 +2,7 @@ from django.db import migrations
 
 
 def set_new_buildings(apps, schema_editor):
-    print('yo')
+
     Flat = apps.get_model('property.Flat')
     for flat in Flat.objects.all():
         flat.new_building = flat.construction_year > 2014

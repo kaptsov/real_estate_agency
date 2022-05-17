@@ -7,7 +7,7 @@ import phonenumber_field.modelfields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0020_auto_20220505_2042'),
+        ('property', '0020_transfer_owners'),
     ]
 
     operations = [

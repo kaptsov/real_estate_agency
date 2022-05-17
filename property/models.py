@@ -70,16 +70,16 @@ class Flat(models.Model):
         return f'{self.town}, {self.address} ({self.price}р.)'
 
 
-class Complainant(models.Model):
+class Claim(models.Model):
 
     complainant = models.ForeignKey(
         User,
-        related_name='complainants',
+        related_name='complainant_claims',
         verbose_name='Кому не понравилась квартира',
         on_delete=models.CASCADE)
     flat = models.ForeignKey(
         Flat,
-        related_name='complainants',
+        related_name='flat_claims',
         verbose_name='Квартира, которая не понравилась',
         on_delete=models.CASCADE)
     message = models.TextField(blank=False)
@@ -110,7 +110,7 @@ class Owner(models.Model):
         Flat,
         related_name='owners',
         verbose_name='Квартиры в собственности',
-        blank = True,
+        blank=True,
     )
 
     def __str__(self):

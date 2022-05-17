@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Flat, Complainant, Owner
+from .models import Flat, Claim, Owner
 
 
 class OwnersInline(admin.TabularInline):
@@ -17,8 +17,8 @@ class FlatAdmin(admin.ModelAdmin):
     raw_id_fields = ['liked_by']
     inlines = [OwnersInline]
 
-@admin.register(Complainant)
-class DislikeAdmin(admin.ModelAdmin):
+@admin.register(Claim)
+class ClaimAdmin(admin.ModelAdmin):
     raw_id_fields = ['complainant', 'flat']
 
 @admin.register(Owner)
